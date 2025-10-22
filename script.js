@@ -32,7 +32,7 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         description: document.getElementById('description').value,
         documentNumber: "",
         pmName:"",
-        clientName : document.getElmentById('clientName')
+        clientName : document.getElementById('clientName').value 
     };
 
     const statusMessage = document.getElementById('messageStatus');
@@ -48,5 +48,6 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         console.error(error);
     }
 });
+
 
 
