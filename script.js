@@ -65,7 +65,8 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         quantity: document.getElementById('quantity').value,
         duration: document.getElementById('duration').value,
         purpose: document.getElementById('purpose').value,
-        description: document.getElementById('description').value
+        description: document.getElementById('description').value,
+        documentNumber: "" // field baru, dikirim kosong
     };
 
     try {
