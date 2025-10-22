@@ -30,7 +30,9 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         duration: document.getElementById('duration').value,
         purpose: document.getElementById('purpose').value,
         description: document.getElementById('description').value,
-        documentNumber: ""
+        documentNumber: "",
+        pmName:"",
+        clientName : document.getElmentById('cleintName')
     };
 
     const statusMessage = document.getElementById('messageStatus');
@@ -46,3 +48,4 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         console.error(error);
     }
 });
+
