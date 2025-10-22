@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Application Form</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <title>Lisensi Form Fanintek</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Pastikan script.js di-load sebagai module dan setelah Firebase SDK -->
+    <script type="module" src="script.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h2>Application Form</h2>
-            <p class="subtitle">Fill in your details below</p>
+            <img src="fan-logo.png" alt="FAN Logo" class="fan-logo" />
+            <h2>Lisensi Form Fanintek</h2>
+            <p class="subtitle">Isi data berikut untuk mengajukan lisensi aplikasi dari Fanintek</p>
         </div>
         
         <form id="inputForm">
@@ -18,118 +21,53 @@
                 <label for="companyName">Company Name</label>
                 <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
             </div>
-            
             <div class="form-group">
                 <label for="applicantName">Applicant Name</label>
                 <input type="text" id="applicantName" name="applicantName" placeholder="Full name" required>
             </div>
-            
             <div class="form-group">
                 <label for="position">Position</label>
                 <input type="text" id="position" name="position" placeholder="Job position" required>
             </div>
-            
             <div class="form-group">
                 <label for="projectName">Project Name</label>
                 <input type="text" id="projectName" name="projectName" placeholder="Project title" required>
             </div>
-            
             <div class="form-group">
                 <label for="submissionDate">Submission Date</label>
                 <input type="date" id="submissionDate" name="submissionDate" required>
             </div>
-            
             <div class="form-group">
                 <label for="statusInput">Status</label>
                 <input type="text" id="statusInput" name="status" placeholder="Current status" required>
             </div>
-            
             <div class="form-group">
                 <label for="applicationName">Application Name</label>
                 <input type="text" id="applicationName" name="applicationName" placeholder="Application name" required>
             </div>
-            
             <div class="form-group">
                 <label for="type">Type</label>
                 <input type="text" id="type" name="type" placeholder="Application type" required>
             </div>
-            
             <div class="form-group">
                 <label for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" placeholder="0" min="0" required>
             </div>
-            
             <div class="form-group">
                 <label for="duration">Duration</label>
                 <input type="text" id="duration" name="duration" placeholder="e.g., 3 months" required>
             </div>
-            
             <div class="form-group">
                 <label for="purpose">Purpose</label>
                 <input type="text" id="purpose" name="purpose" placeholder="Purpose of application" required>
             </div>
-            
             <div class="form-group full">
                 <label for="description">Description</label>
                 <textarea id="description" name="description" placeholder="Detailed description..." required></textarea>
             </div>
-            
             <button type="submit">Submit Application</button>
-            <div id="messageStatus"></div>
+            <div id="status"></div>
         </form>
     </div>
-
-    <script type="module" src="script.js>
-        const form = document.getElementById('inputForm');
-        const messageStatus = document.getElementById('messageStatus');
-        const submitBtn = form.querySelector('button[type="submit"]');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            submitBtn.disabled = true;
-            messageStatus.innerHTML = '<span class="loader"></span>Sending data...';
-            messageStatus.className = 'loading';
-
-            const formData = {
-                companyName: document.getElementById('companyName').value,
-                applicantName: document.getElementById('applicantName').value,
-                position: document.getElementById('position').value,
-                projectName: document.getElementById('projectName').value,
-                submissionDate: document.getElementById('submissionDate').value,
-                status: document.getElementById('statusInput').value,
-                applicationName: document.getElementById('applicationName').value,
-                type: document.getElementById('type').value,
-                quantity: document.getElementById('quantity').value,
-                duration: document.getElementById('duration').value,
-                purpose: document.getElementById('purpose').value,
-                description: document.getElementById('description').value,
-                timestamp: new Date().toISOString()
-            };
-
-            try {
-                console.log('Data yang akan dikirim:', formData);
-
-                // Simulasi pengiriman data
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                messageStatus.innerHTML = '✓ Application submitted successfully!';
-                messageStatus.className = 'success';
-                form.reset();
-                submitBtn.disabled = false;
-
-                setTimeout(() => {
-                    messageStatus.className = '';
-                    messageStatus.innerHTML = '';
-                }, 5000);
-
-            } catch (error) {
-                messageStatus.innerHTML = '✗ Error: ' + error.message;
-                messageStatus.className = 'error';
-                submitBtn.disabled = false;
-            }
-        });
-    </script>
 </body>
 </html>
-
