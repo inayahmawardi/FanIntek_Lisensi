@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisensi Form Fanintek</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Pastikan script.js di-load sebagai module -->
-    <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="fan-logo.png" alt="FAN Logo" class="fan-logo" />
-            <h2>Lisensi Form Fanintek</h2>
-            <p class="subtitle">Isi data berikut untuk mengajukan lisensi aplikasi dari Fanintek</p>
+            <h2>Application Form</h2>
+            <p class="subtitle">Fill in your details below</p>
         </div>
-        
         <form id="inputForm">
             <div class="form-group">
                 <label for="companyName">Company Name</label>
@@ -66,8 +62,9 @@
                 <textarea id="description" name="description" placeholder="Detailed description..." required></textarea>
             </div>
             <button type="submit">Submit Application</button>
-            <div id="status"></div>
+            <div id="messageStatus"></div>
         </form>
     </div>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
