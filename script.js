@@ -1,80 +1,55 @@
-// Ganti dengan konfigurasi Firebase Anda
+// Import Firebase SDK modular
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Konfigurasi Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBe8dlow52Y7aSBxDTOwyo3nS5ZMg0gzJ8",
   authDomain: "fandashboard.firebaseapp.com",
   projectId: "fandashboard",
-  storageBucket: "fandashboard.firebasestorage.app",
+  storageBucket: "fandashboard.appspot.com", // <- perbaiki, harus .appspot.com
   messagingSenderId: "8318759415",
   appId: "1:8318759415:web:dc8c427606488a8b16bef2",
   measurementId: "G-HHCQEMEXF4"
 };
 
-// URL database Firebase (Realtime Database)
-const databaseURL = "https://fandashboard-default-rtdb.firebaseio.com/";
-
-document.getElementById('inputForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nama = document.getElementById('nama').value;
-    const email = document.getElementById('email').value;
-
-    // Data yang akan dikirim
-    const data = {
-        nama: nama,
-        email: email,
-        timestamp: new Date().toISOString()
-    };
-
-    // Kirim data ke Firebase Realtime Database
-    fetch(`${databaseURL}/inputs.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        document.getElementById('status').textContent = 'Data berhasil dikirim!';
-        document.getElementById('inputForm').reset();
-    })
-    .catch(error => {
-        document.getElementById('status').textContent = 'Gagal mengirim data.';
-        console.error(error);
-    });
-});
-
-// Import Firebase SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// Inisialisasi Firebase
+// Inisialisasi Firebase dan Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Fungsi submit form
 document.getElementById('inputForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Ambil data dari form
     const data = {
         companyName: document.getElementById('companyName').value,
         applicantName: document.getElementById('applicantName').value,
         position: document.getElementById('position').value,
         projectName: document.getElementById('projectName').value,
         submissionDate: document.getElementById('submissionDate').value,
-        status: document.getElementById('status').value,
+        status: document.getElementById('statusInput').value,
         applicationName: document.getElementById('applicationName').value,
         type: document.getElementById('type').value,
         quantity: document.getElementById('quantity').value,
         duration: document.getElementById('duration').value,
         purpose: document.getElementById('purpose').value,
         description: document.getElementById('description').value,
-        documentNumber: "" // field baru, dikirim kosong
+        documentNumber: "" // bisa diisi otomatis jika perlu
     };
 
+    // Status message element
+    const statusMessage = document.getElementById('messageStatus');
+
     try {
+        // Simpan ke koleksi "licenses"
         await addDoc(collection(db, "licenses"), data);
-        document.getElementById('status').textContent = 'Data berhasil dikirim!';
+        statusMessage.textContent = 'Data berhasil dikirim!';
+        statusMessage.style.color = 'green';
         document.getElementById('inputForm').reset();
     } catch (error) {
-        document.getElementById('status').textContent = 'Gagal mengirim data.';
+        statusMessage.textContent = 'Gagal mengirim data. Silakan cek koneksi atau konfigurasi Firebase.';
+        statusMessage.style.color = 'red';
         console.error(error);
     }
 });
