@@ -43,3 +43,4 @@ document.getElementById('inputForm').addEventListener('submit', async function(e
         console.error(error);
     }
 });
+
